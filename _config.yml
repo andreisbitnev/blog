@@ -5,7 +5,7 @@
 # Site
 title: Andrei Sbitnev # your blog title name
 subtitle:  
-author: Andrei Sbitnev # 作者
+author: Andrei Sbitnev
 language: 
 timezone: 
 
@@ -13,8 +13,8 @@ timezone:
 # more detail check out docs
 SEOTitle: Andrei Sbitnev's blog 
 header-img: img/pcb2.jpg
-email: HaojenMa@gmail.com
-description: "马浩珍在 Github 上的个人博客"
+email: andreisbitnev@gmail.com
+description: ""
 keyword: # seo key words
 
 favicon: # your favicon png
@@ -29,12 +29,12 @@ permalink_defaults:
 
 # SNS settings
 # RSS:
-weibo_username: haojen
-zhihu_username: megahertz
-github_username: haojen
-twitter_username: ehazon
-facebook_username:  
-linkedin_username:  
+weibo_username: 
+zhihu_username: 
+github_username: andreisbitnev
+twitter_username: 
+facebook_username: andreisbitnev
+linkedin_username:  andrei-sbitnev-a6995811a
 
 # Build settings
 anchorjs: false                        # if you want to customize anchor. check out line:181 of `post.html`
@@ -44,9 +44,9 @@ anchorjs: false                        # if you want to customize anchor. check 
 disqus_username: 
 
 # Duoshuo settings
-duoshuo_username:  # 你的多说帐号
+#duoshuo_username:  # 你的多说帐号
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 # Use livere
 use_livere:
@@ -69,7 +69,7 @@ featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 # friends
-friends:  # 友链
+#friends:  # 友链
 
 # Directory
 source_dir: source
@@ -138,17 +138,17 @@ deploy:
 
 
 # img CDN path
-cdn-url:  # 你的CDN地址
+#cdn-url:  # 你的CDN地址
 
 # Qiniu imageView2 API
 # More info http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
-clip-content: "?imageView2/1/w/1400/h/400/interlace/1/q/90"
-clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
-clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
+# clip-content: "?imageView2/1/w/1400/h/400/interlace/1/q/90"
+# clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
+# clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
 
 # post default images
-post-default-img: #博文默认的图片
-post-default-img-mobile: #移动端显示的图片
+# post-default-img: #博文默认的图片
+# post-default-img-mobile: #移动端显示的图片
 
 # search api , set your custom key
 swiftype_key: 
@@ -157,4 +157,4 @@ swiftype_key:
 # archive page title 
 archive:
     title: archives
-    description: 可以根据归档日期检索所有文件
+    # description: 可以根据归档日期检索所有文件
