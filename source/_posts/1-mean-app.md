@@ -450,3 +450,9 @@ Start the backend server, by navigating inside the ~/smarthouse/be and running `
 Open up another terminal and start an angular app, by navigating inside the ~/smarthouse/fe and running `npm run dev`<br>
 Now open the browser and go to [http://localhost:4200](http://localhost:4200), you should see a white page with one input field and a disabled "submit" button. Enter something in the input field and submit it to the server. The submitted text should appear below the form as a line in a list. You can now refresh the page, and the list should remain unchanged.
 <img src="/img/finished.png">
+
+## Git repository
+The version of MEAN app built in this tutorial is available in a github repo, on the [1-mean-app-base](https://github.com/andreisbitnev/smart-house/tree/1-mean-app-base) branch. You can git clone it with
+```bash
+git clone -b 1-mean-app-base https://github.com/andreisbitnev/smart-house.git
+```
