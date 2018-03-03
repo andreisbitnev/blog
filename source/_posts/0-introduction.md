@@ -31,4 +31,4 @@ Each post is a separate tutorial on some particular topic, and it starts where t
 </ul>
 
 ## Next up
-Go ahead and check out the next post about building the project skeleton with angular cli and express generator [Angular 5 MEAN app](/2018/03/01/1-mean-app/)
+Go ahead and check out the next post about building the project skeleton with angular cli and express generator [Angular 5 MEAN app](/2018/02/22/1-mean-app/)
