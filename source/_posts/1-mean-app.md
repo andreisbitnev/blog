@@ -12,6 +12,7 @@ tags:
 	- Node.js
 	- Express
 ---
+<img src="/img/mean_code.png" style="height:0; width:0; position: absolute">
 ## Introduction
 
 &nbsp; In this tutorial, we will build a base MEAN app using <b>Angular 5</b>, <b>MongoDb</b> and <b>Express.js</b>. The frontend and backend parts will be separated into different directories, and will be run as separate services.<br>
