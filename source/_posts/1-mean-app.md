@@ -2,7 +2,7 @@
 layout: post
 title: "1-Angular 5 MEAN app"
 subtitle: "Setting up MEAN app with angular cli and express-generator"
-date: 2018-02-22 21:54
+date: 2018-03-04 13:37
 author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
