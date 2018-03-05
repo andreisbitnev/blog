@@ -2,7 +2,7 @@
 layout: post
 title: "0-Introduction"
 subtitle: "What this blog is all about"
-date: 2018-03-04 12:00
+date: 2018-03-03 12:00
 author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
