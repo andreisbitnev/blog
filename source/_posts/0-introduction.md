@@ -2,7 +2,7 @@
 layout: post
 title: "0-Introduction"
 subtitle: "What this blog is all about"
-date: 2018-03-03 12:00
+date: 2018-03-02 12:00
 author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
@@ -31,4 +31,4 @@ Each post is a separate tutorial on some particular topic, and it starts where t
 </ul>
 
 ## Next up
-Go ahead and check out the next post about building the project skeleton with angular cli and express generator [Angular 5 MEAN app](/2018/03/04/1-mean-app/)
+Go ahead and check out the next post about building the project skeleton with angular cli and express generator [Angular 5 MEAN app](/2018/03/03/1-mean-app/)

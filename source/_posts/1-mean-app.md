@@ -2,7 +2,7 @@
 layout: post
 title: "1-Angular 5 MEAN app"
 subtitle: "Setting up MEAN app with angular cli and express-generator"
-date: 2018-03-04 13:37
+date: 2018-03-03 13:37
 author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
@@ -12,7 +12,6 @@ tags:
 	- Node.js
 	- Express
 ---
-<img src="/img/mean_code.png" style="height:0; width:0; position: absolute">
 ## Introduction
 
 &nbsp; In this tutorial, we will build a base MEAN app using <b>Angular 5</b>, <b>MongoDb</b> and <b>Express.js</b>. The frontend and backend parts will be separated into different directories, and will be run as separate services.<br>
@@ -23,6 +22,7 @@ There are different possible ways to structure a MEAN app, and separating the fr
 <li>Easier to build the app using tools like angular cli and express-generator.</li>
 </ul>
 The base app can later be used to quickly start a new MEAN project, and will be used in further tutorials to build the <b>smart-house</b> project.
+<img src="/img/code_thumb.png" style="height:0; width:0; position: absolute">
 
 ## Quick Start
 
