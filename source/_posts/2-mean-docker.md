@@ -23,7 +23,7 @@ tags:
 
 To run any docker container, [Docker](https://docs.docker.com/install/#time-based-release-schedule) must first be installed on your system. Just choose your operating system, and follow the installation instructions. Use the CE version!<br>
 In this tutorial we will also use the docker-compose, if you\`re using <b>Docker for windows</b> or <b>Docker for mac</b>, it is already installed with the package. Linux users should install it separately, here\`s a [link](https://docs.docker.com/compose/install/)<br>
-
+<img src="/img/docker.jpg" style="height:0; width:0; position: absolute">
 As stated above, we will be building Docker containers for the MEAN app created in the previous tutorial. To get the app clone it from the [github repo](https://github.com/andreisbitnev/smart-house/tree/1-mean-app-base) 
 ```bash
 git clone -b 1-mean-app-base https://github.com/andreisbitnev/smart-house.git
