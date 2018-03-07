@@ -1,0 +1,49 @@
+{
+	"comments": [
+        {
+            "name": "John Smith",
+            "avatar": "/default/user.svg",
+            "timestamp": 1520411088060,
+            "text": "Great post",
+            "comments": [{
+                "name": "Joshua Banda",
+                "avatar": "/default/user.svg",
+                "timestamp": 1520411204148,
+                "text": "Totally agree",
+                "comments": [
+
+                ]
+            }]
+        },
+        {
+            "name": "Ben Johnson",
+            "avatar": "/default/user.svg",
+            "timestamp": 1520411088060,
+            "text": "Useless post",
+            "comments": [
+                {
+                    "name": "Joshua Banda",
+                    "avatar": "/default/user.svg",
+                    "timestamp": 1520411204148,
+                    "text": "Totally agree",
+                    "comments": [
+                        {
+                            "name": "John Smith",
+                            "avatar": "/default/user.svg",
+                            "timestamp": 1520411088060,
+                            "text": "Hey man, I though you liked it",
+                            "comments": [] 
+                        }
+                    ]
+                },
+                {
+                    "name": "Jack Daniels",
+                    "avatar": "/default/user.svg",
+                    "timestamp": 1520411204148,
+                    "text": "Liked the post, thanks",
+                    "comments": []
+                }
+            ]
+        }
+    ]
+}

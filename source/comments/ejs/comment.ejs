@@ -1,0 +1,20 @@
+<% for(let i=0; i<comments.length; i++) { %>
+        <li class="cmt-comment">
+            <div class="cmt-avatar" style="background-image:url(<%= comments[i].avatar %>)"></div>
+            <div class="cmt-content">
+                <div class="cmt-row">
+                    <div class="cmt-name"><%= comments[i].name %></div>
+                    <div class="cmt-date"><%= helpers.moment(comments[i].timestamp).fromNow() %></div>
+                </div>
+                <div class="cmt-row">
+                    <div class="cmt-text"><%= comments[i].text %></div>
+                </div>
+                <div class="cmt-row">
+                    <span class="cmt-reply">Reply</span>
+                </div>
+                <div class="cmt-row">
+                    <ul class="cmt-comments"><%- helpers.render(comments[i].comments, commentTemplate) %></ul>
+                </div>
+            </div>
+        </li>
+<% } %>
