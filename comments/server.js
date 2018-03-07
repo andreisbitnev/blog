@@ -8,6 +8,7 @@ const app = express();
 const config = require("./config")
 
 app.use(express.static(path.join(__dirname, 'avatars')));
+app.use(express.static(path.join(__dirname, '/../public')));
 
 app.get('/comments/:post', function (req, res) {
     const post = req.params.post;
@@ -19,6 +20,6 @@ app.get('/comments/:post', function (req, res) {
         });
 });
 
-app.listen(4000, function () {
-  console.log('comments server running on port 4000');
+app.listen(config.port, function () {
+  console.log(`server running on port ${config.port}`);
 });
