@@ -458,5 +458,5 @@ The version of MEAN app built in this tutorial is available in a github repo, on
 git clone -b 1-mean-app-base https://github.com/andreisbitnev/smart-house.git
 ```
 
-<!-- ## Next up
-In the next tutorial we will be Dockerizing the base app, so go ahead and check it out [2-MEAN app with Docker](/2018/03/01/2-mean-docker/) -->
+## Next up
+In the next tutorial we will be Dockerizing the base app, so go ahead and check it out [2-MEAN app with Docker](/2018/03/09/2-mean-docker/)
