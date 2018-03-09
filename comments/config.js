@@ -1,5 +1,5 @@
 module.exports = require("rc")("comments", {
-    port: 5000,
+    port: 4000,
     templates: {
         comments: "comments.ejs",
         comment: "comment.ejs"
