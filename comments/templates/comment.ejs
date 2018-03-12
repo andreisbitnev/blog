@@ -13,7 +13,7 @@
                     <span class="cmt-reply">Reply</span>
                 </div>
                 <div class="cmt-row">
-                    <ul class="cmt-comments"><%- helpers.render(comments[i].comments, commentTemplate) %></ul>
+                    <ul class="cmt-comments"><%- helpers.getHtml(comments[i].comments, helpers.templates.comments) %></ul>
                 </div>
             </div>
         </li>

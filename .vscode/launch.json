@@ -13,8 +13,8 @@
             "restart": true,
             "sourceMaps": false,
             "protocol": "inspector",
-            "localRoot": "${workspaceFolder}/source/comments",
-            "remoteRoot": "/home/andrei/personal/blog/source/comments"
+            "localRoot": "${workspaceFolder}/comments",
+            "remoteRoot": "/home/andrei/projects/blog/comments"
         },
     ]
 }

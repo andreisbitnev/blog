@@ -1,7 +1,8 @@
 module.exports = require("rc")("comments", {
     port: 4000,
+    database: 'main.db',
     templates: {
-        comments: "comments.ejs",
+        container: "comments.ejs",
         comment: "comment.ejs"
     }
 });
