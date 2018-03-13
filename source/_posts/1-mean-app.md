@@ -6,15 +6,14 @@ date: 2018-03-03 13:37
 author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
+intro: "<h2>Introduction</h2> <p><i>This step-by-step guide is part of a tutorial series to build a <b>smart house</b> project, using JavaScript as the main language, you can read more about it <a href='/2018/03/02/0-introduction/'>here</a></i></p>"
 tags:
 	- MEAN
 	- Angular 5
 	- Node.js
 	- Express
 ---
-## Introduction
-
-&nbsp; In this tutorial, we will build a base MEAN app using <b>Angular 5</b>, <b>MongoDb</b> and <b>Express.js</b>. The frontend and backend parts will be separated into different directories, and will be run as separate services.<br>
+In this tutorial, we will build a base MEAN app using <b>Angular 5</b>, <b>MongoDb</b> and <b>Express.js</b>. The frontend and backend parts will be separated into different directories, and will be run as separate services.<br>
 There are different possible ways to structure a MEAN app, and separating the frontend from backend has its own advantages:
 <ul>
 <li>The structure is simpler and easier to maintain. With time your app will grow, and the number of packages used in both parts will also grow.</li>
@@ -23,6 +22,7 @@ There are different possible ways to structure a MEAN app, and separating the fr
 </ul>
 The base app can later be used to quickly start a new MEAN project, and will be used in further tutorials to build the <b>smart-house</b> project.
 <img src="/img/code_thumb.png" style="height:0; width:0; position: absolute">
+
 
 ## Quick Start
 

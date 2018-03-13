@@ -6,13 +6,13 @@ date: 2018-03-09 01:00
 author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
+intro: "<h2>Introduction</h2> <p><i>This step-by-step guide is part of a tutorial series to build a <b>smart house</b> project, using JavaScript as the main language, you can read more about it <a href='/2018/03/02/0-introduction/'>here</a></i></p>"
 tags:
   - Docker
 	- MEAN
 ---
-## Introduction
 
-&nbsp; In this tutorial, we will configure Docker containers for the MEAN app, we created in the previous blog post [1-Angular 5 MEAN app](/2018/02/22/1-mean-app/). Using Docker in development as well as in production has a lot of advantages:
+In this tutorial, we will configure Docker containers for the MEAN app, we created in the previous blog post [1-Angular 5 MEAN app](/2018/02/22/1-mean-app/). Using Docker in development as well as in production has a lot of advantages:
 <ul>
 <li>The project will run in the same environment during development as well as in production. No matter what hardware or operating system is used, Docker containers will behave the same on all machines.</li>
 <li>Deployment process will be a lot quicker and less painfull</li>

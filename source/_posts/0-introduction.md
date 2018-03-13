@@ -7,10 +7,10 @@ author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
 tags:
+intro: "<h2>Introduction</h2>"
 ---
-## Introduction
 
-&nbsp; This blog is all about web development! The goal is to provide a step-by-step guide on building and deploying a <b>smart-house</b> project using JavaScript as the main programming language on both frontend and backend.<br>
+This blog is all about web development! The goal is to provide a step-by-step guide on building and deploying a <b>smart-house</b> project using JavaScript as the main programming language on both frontend and backend.<br>
 Each post is a separate tutorial on some particular topic, and it starts where the last post left off. There will be a separate branch in a [github repository](https://github.com/andreisbitnev/smart-house) for each topic/post, so it is easy to continue at any step.
 >Tip: for example for this post there is a branch [0-introduction](https://github.com/andreisbitnev/smart-house/tree/0-introduction), so you can clone it with `git clone https://github.com/andreisbitnev/smart-house.git`
 
