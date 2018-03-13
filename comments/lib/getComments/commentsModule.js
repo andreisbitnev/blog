@@ -25,7 +25,7 @@ function addNewPost (dbLocation, postName) {
         const sqlite3 = require('sqlite3').verbose();
         let db = new sqlite3.Database(dbLocation);
     
-        const emptyComments = JSON.stringify({comments: []});
+        const emptyComments = JSON.stringify({timestamp: new Date().getTime(),comments: []});
      
         db.run(`INSERT INTO comments(name, json) VALUES(?, ?)`, [postName, emptyComments], function(err) {
             if (err) {

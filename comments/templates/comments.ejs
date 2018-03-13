@@ -1,19 +1,19 @@
-<% for(let i=0; i<comments.length; i++) { %>
+<% for(let i=0; i<data.length; i++) { %>
         <li class="cmt-comment">
-            <div class="cmt-avatar" style="background-image:url(<%= comments[i].avatar %>)"></div>
+            <div class="cmt-avatar" style="background-image:url(<%= data[i].avatar %>)"></div>
             <div class="cmt-content">
                 <div class="cmt-row">
-                    <div class="cmt-name"><%= comments[i].name %></div>
-                    <div class="cmt-date"><%= moment(comments[i].timestamp).fromNow() %></div>
+                    <div class="cmt-name"><%= data[i].name %></div>
+                    <div class="cmt-date"><%= moment(data[i].timestamp).fromNow() %></div>
                 </div>
                 <div class="cmt-row">
-                    <div class="cmt-text"><%= comments[i].text %></div>
+                    <div class="cmt-text"><%= data[i].text %></div>
                 </div>
                 <div class="cmt-row">
                     <span class="cmt-reply">Reply</span>
                 </div>
                 <div class="cmt-row">
-                    <ul class="cmt-comments" data-cmt-time="<%= comments[i].timestamp %>"><%- getHtml(comments[i].comments, templates.comments) %></ul>
+                    <ul class="cmt-comments" data-cmt-time="<%= data[i].timestamp %>"><%- getHtml(data[i].comments, templates.comments) %></ul>
                 </div>
             </div>
         </li>

@@ -14,10 +14,10 @@ function addNewPost (dbLocation, postName) {
         db.close();
     })
 }
-function addComment(commentsJson, commentBody) {
+function addComment(commentsJson, commentBody, commentTemplate) {
     const comments = JSON.parse(commentsJson);
     
 }
 module.exports = {
-    getComments
+    addComment
 };

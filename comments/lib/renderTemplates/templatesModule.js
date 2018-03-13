@@ -3,14 +3,13 @@ let helpers = {moment: require("moment")}
 
 function render(json, templates) {
     helpers = {...helpers, ...{templates, getHtml}};
-    comments = JSON.parse(json).comments;
     return new Promise((resolve, reject) => {
-        resolve(getHtml(comments, templates.container));
+        resolve(getHtml(JSON.parse(json), templates.container));
     })
 }
-function getHtml(comments, template) {
+function getHtml(data, template) {
     let result;
-    ejs.renderFile(template, {...helpers, ...{comments}}, null, (err, str) => {
+    ejs.renderFile(template, {...helpers, ...{data}}, null, (err, str) => {
         if (err) {
             return err;
         }
