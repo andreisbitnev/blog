@@ -1,3 +1,5 @@
+const Joi = require("joi");
+
 function addNewPost (dbLocation, postName) {
     return new Promise((resolve, reject) => {
         const sqlite3 = require('sqlite3').verbose();
@@ -15,8 +17,12 @@ function addNewPost (dbLocation, postName) {
     })
 }
 function addComment(commentsJson, commentBody, commentTemplate) {
-    const comments = JSON.parse(commentsJson);
-    
+    return new Promise((resolve, reject) => {
+        const comments = JSON.parse(commentsJson);
+        const schema = require(commentTemplate);
+        const result = Joi.attempt(commentBody, schema);
+        resolve(result)
+    })
 }
 module.exports = {
     addComment

@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 const config = require("./config");
+const bodyParser = require('body-parser');
 const db = path.join(__dirname, config.database);
 let templates = config.templates;
 Object.entries(templates).forEach(([key, value]) => {
@@ -14,6 +15,8 @@ const postComment = require("./lib/postComment/middleware");
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, '/../public')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/comments/:postName', [
     getComments(db),

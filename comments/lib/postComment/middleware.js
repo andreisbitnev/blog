@@ -6,7 +6,7 @@ module.exports = (templates) => {
             res.send(html)
         })
         .catch((err) => {
-            return err;
+            return err.message;
         });
     }
 }
