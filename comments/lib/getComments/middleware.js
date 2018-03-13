@@ -5,6 +5,7 @@ module.exports = (db) => {
         commentsModule.getComments(db, postName)
         .then((result) => {
             req.json = result.json;
+            next();
         })
         .catch((err) => {
             return error;

@@ -1,74 +1,20 @@
-
-            <style>
-                    .cmt-contianer {
-                        margin-top: 20px;
-                    }
-                    .cmt-avatar {
-                        width: 40px;
-                        height: 40px;
-                        float: left;
-                    }
-                    .cmt-content {
-                        float: left;
-                        margin-left: 10px;
-                    }
-                    .cmt-comment-box {
-                        margin-bottom: 20px;
-                    }
-                    .cmt-comments {
-                        list-style-type: none;
-                        padding: 10px;
-                    }
-                    .cmt-comment {
-                        margin-left: 10px;
-                        margin-top: 10px;
-                        clear: both;
-                    }
-                    .cmt-name {
-                        font-weight: bold;
-                        float: left;
-                        color: rgb(41, 198, 205);
-                    }
-                    .cmt-date {
-                        margin-left: 7px;
-                        float: left;
-                    }
-                    .cmt-row {
-                        clear: both;
-                    }
-                    .cmt-reply {
-                        color: #656c7a;
-                        cursor: pointer;
-                    }
-                    .cmt-reply:hover {
-                        color: #2a2e2e;
-                    }
-                    .cmt-comment-box textarea {
-                        height: 30vh;
-                        max-height: 100px;
-                        width: 100%;
-                    }
-                    .cmt-buttons {
-                        display: flex;
-                        justify-content: flex-end;
-                    }
-                    .cmt-btn {
-                        border-radius: 5px;
-                    }
-                    
-                </style>
-        <div class="cmt-contianer">
-            <h4>Post a comment</h4>
-            <div class="cmt-comment-box">
-                <form>
-                    <textarea name="message"></textarea>
-                    <div class="cmt-buttons">
-                        <button type="submit" class="btn btn-primary cmt-btn">Post as a guest</button>
-                    </div>
-                </form>
+<% for(let i=0; i<comments.length; i++) { %>
+        <li class="cmt-comment">
+            <div class="cmt-avatar" style="background-image:url(<%= comments[i].avatar %>)"></div>
+            <div class="cmt-content">
+                <div class="cmt-row">
+                    <div class="cmt-name"><%= comments[i].name %></div>
+                    <div class="cmt-date"><%= moment(comments[i].timestamp).fromNow() %></div>
+                </div>
+                <div class="cmt-row">
+                    <div class="cmt-text"><%= comments[i].text %></div>
+                </div>
+                <div class="cmt-row">
+                    <span class="cmt-reply">Reply</span>
+                </div>
+                <div class="cmt-row">
+                    <ul class="cmt-comments" data-cmt-time="<%= comments[i].timestamp %>"><%- getHtml(comments[i].comments, templates.comments) %></ul>
+                </div>
             </div>
-            <ul class="cmt-comments">
-                <%- helpers.getHtml(comments, helpers.templates.comments) %>
-            </ul>
-        </div>
-    
+        </li>
+<% } %>

@@ -6,7 +6,7 @@ const config = require("./config");
 const db = path.join(__dirname, config.database);
 let templates = config.templates;
 Object.entries(templates).forEach(([key, value]) => {
-    templates[key] = path.join(__dirname, value);
+    templates[key] = path.join(__dirname, 'templates', value);
 });
 const getComments = require("./lib/getComments/middleware");
 const renderTemplates = require("./lib/renderTemplates/middleware")
@@ -16,10 +16,12 @@ app.use(express.static(path.join(__dirname, '/../public')));
 
 app.get('/comments/:postName', [
     getComments(db),
-    renderTemplates(templates),
-    html => (req, res) => {
-        res.send(html);
-    }
+    renderTemplates(templates)
+]);
+
+app.post('/comments/:postName', [
+    getComments(db),
+    postComment()
 ]);
 
 app.listen(config.port, function () {

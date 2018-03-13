@@ -1,7 +1,7 @@
-const templatesModule = require("./templatesModule");
+const commentModule = require("./commentModule");
 module.exports = (templates) => {
     return (req, res) => {
-        templatesModule.render(req.json, templates, templates.container)
+        commentModule.addComment(req.json, req.body)
         .then((html) => {
             res.send(html)
         })
