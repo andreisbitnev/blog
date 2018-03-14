@@ -60,8 +60,8 @@
         <div class="cmt-contianer">
             <h4>Post a comment</h4>
             <div class="cmt-comment-box">
-                <form>
-                    <textarea name="message"></textarea>
+                <form onsubmit="cmt.submitComment(event);">
+                    <textarea name="text"></textarea>
                     <div class="cmt-buttons">
                         <button type="submit" class="btn btn-primary cmt-btn">Post as a guest</button>
                     </div>

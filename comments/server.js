@@ -12,6 +12,7 @@ Object.entries(templates).forEach(([key, value]) => {
 const getComments = require("./lib/getComments/middleware");
 const renderTemplates = require("./lib/renderTemplates/middleware");
 const postComment = require("./lib/postComment/middleware");
+const createComment = require("./lib/createComment/middleware");
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, '/../public')));
@@ -25,7 +26,8 @@ app.get('/comments/:postName', [
 
 app.post('/comments/:postName', [
     getComments(db),
-    postComment(templates)
+    createComment(templates),
+    postComment(db)
 ]);
 
 app.listen(config.port, function () {
