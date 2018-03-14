@@ -118,7 +118,7 @@ Now let\`s install all the dependencies. Just cd into the ~/smart-house/be folde
 npm install
 ```
 
-Although it is possible to communicate with mongoDb without any additional packages, we will be using the Mongoose.js library for that purpose. So let\`s add it to the dependencies. Just cd into the ~/smart-house/be folder and run 
+Although it is possible to communicate with mongoDb without any additional packages, we will be using the Mongoose.js library for that purpose. Not only is it easier to use, it is less error prone, and as a plus prevents nosql injections (if you\`re using proper schemas). So let\`s add it to the dependencies. Just cd into the ~/smart-house/be folder and run 
 
 ```bash
 npm install --save mongoose
