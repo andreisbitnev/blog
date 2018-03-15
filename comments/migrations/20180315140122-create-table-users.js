@@ -15,19 +15,29 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.createTable("comments", {
-    name: {
-      type: type.STRING,
-      primaryKey: true
+  return db.createTable("users", {
+    id: {
+      type: type.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
-    json: {
+    provider: {
+      type: type.STRING
+    },
+    provider_id: {
+      type: type.STRING
+    },
+    display_name: {
+      type: type.STRING
+    },
+    name: {
       type: type.STRING
     }
   });
 };
 
 exports.down = function(db) {
-  return db.dropTable("comments");
+  return db.dropTable("users");
 };
 
 exports._meta = {
