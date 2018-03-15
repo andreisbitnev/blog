@@ -14,6 +14,7 @@
     "body-parser": "^1.18.2",
     "connect-sqlite3": "^0.9.10",
     "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
     "db-migrate": "^0.10.5",
     "db-migrate-sqlite3": "^0.2.1",
     "ejs": "^2.5.7",

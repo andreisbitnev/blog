@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const config = require("./config");
-const bodyParser = require('body-parser');
 const dbLocation = path.join(__dirname, config.database);
 const sqlite3 = require('sqlite3').verbose();
 
@@ -14,14 +13,14 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 app.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: 'testing asd',
-    cookie: { 'url': 'andreisbitnev.com' },
+    secret: 'anything',
+    cookie: { domain: 'localhost' },
     store: new SQLiteStore({ db: 'main.db' })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) => {
+passport.deserializeUser((user, done) => {
     let db = new sqlite3.Database(dbLocation);        
     let sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;    
     db.all(sql, [user.provider, user.id], (err, rows) => {
@@ -29,27 +28,15 @@ passport.serializeUser((user, done) => {
             console.log(err.message);
         }
         if (!rows || rows.length === 0) {
-            let sql = `INSERT INTO users (provider, provider_id, display_name, name) VALUES (?, ?, ?, ?)`;
-            db.all(sql, [user.provider, user.id, user.displayName, user.username || user.displayName], (err, rows) => {
-                if (err) {
-                    console.log(err.message);
-                }
-                let sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;
-                db.all(sql, [user.provider, user.id], (err, rows) => {
-                    if (err) {
-                        console.log(err.message);
-                    }
-                    return done(null, rows[0]);
-                });
-            })
+            return done(null, null);
+        }else{
+            return done(null, rows[0]);
         }
-        return done(null, rows[0]);
     });
-
     db.close();
 });
 
-passport.deserializeUser((user, done) => {
+passport.serializeUser((user, done) => {
     done(null, {
         provider: user.provider,
         id: user.provider_id
@@ -62,7 +49,31 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:4000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    done(null, profile)
+    let db = new sqlite3.Database(dbLocation);        
+    let sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;    
+    db.all(sql, [profile.provider, profile.id], (err, rows) => {
+        if (err) {
+            console.log(err.message);
+        }
+        if (!rows || rows.length === 0) {
+            let sql = `INSERT INTO users (provider, provider_id, display_name, name) VALUES (?, ?, ?, ?)`;
+            db.all(sql, [profile.provider, profile.id, profile.displayName, profile.username || profile.displayName], (err, rows) => {
+                if (err) {
+                    console.log(err.message);
+                }
+                let sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;
+                db.all(sql, [profile.provider, profile.id], (err, rows) => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                    done(null, rows[0]);
+                });
+            })
+        }else{
+            done(null, rows[0]);
+        }
+    });
+    db.close();
   }
 ));
 
