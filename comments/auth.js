@@ -4,19 +4,17 @@ const app = express();
 const config = require("./config");
 const dbLocation = path.join(__dirname, config.database);
 const sqlite3 = require('sqlite3').verbose();
-
+const Keygrip = require('keygrip');
 const passport = require('passport');
-const session = require('express-session');
-const SQLiteStore = require('connect-sqlite3')(session);
+const cookieSession = require('cookie-session')
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-app.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'anything',
-    cookie: { domain: 'localhost' },
-    store: new SQLiteStore({ db: 'main.db' })
-}));
+app.use(cookieSession({
+    name: 'session',
+    keys: new Keygrip([config.secrets[0], config.secrets[1]], 'SHA384', 'base64'),
+    domain: config.domain
+}))
+
 app.use(passport.initialize());
 app.use(passport.session());
 

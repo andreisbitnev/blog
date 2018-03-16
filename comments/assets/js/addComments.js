@@ -10,7 +10,7 @@ var cmt = (function cmtScripts() {
         getComments();
     }
     function getComments() {
-        fetch('/comments/'+ postName)
+        fetch('/comments/'+ postName, {credentials: 'include'})
         .then(function(res) {
             return res.text();
         }).then(function(html) {
