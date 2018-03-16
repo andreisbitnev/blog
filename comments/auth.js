@@ -8,6 +8,7 @@ const Keygrip = require('keygrip');
 const passport = require('passport');
 const cookieSession = require('cookie-session')
 const FacebookStrategy = require('passport-facebook').Strategy;
+const db = new sqlite3.Database(dbLocation);
 
 app.use(cookieSession({
     name: 'session',
@@ -18,20 +19,10 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.deserializeUser((user, done) => {
-    let db = new sqlite3.Database(dbLocation);        
-    let sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;    
-    db.all(sql, [user.provider, user.id], (err, rows) => {
-        if (err) {
-            console.log(err.message);
-        }
-        if (!rows || rows.length === 0) {
-            return done(null, null);
-        }else{
-            return done(null, rows[0]);
-        }
-    });
-    db.close();
+passport.deserializeUser((user, done) => {        
+    findUser(user.provider, user.id)
+    .then((user) => done(null, user))
+    .catch(err => done(err, null));
 });
 
 passport.serializeUser((user, done) => {
@@ -47,31 +38,9 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:4000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    let db = new sqlite3.Database(dbLocation);        
-    let sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;    
-    db.all(sql, [profile.provider, profile.id], (err, rows) => {
-        if (err) {
-            console.log(err.message);
-        }
-        if (!rows || rows.length === 0) {
-            let sql = `INSERT INTO users (provider, provider_id, display_name, name) VALUES (?, ?, ?, ?)`;
-            db.all(sql, [profile.provider, profile.id, profile.displayName, profile.username || profile.displayName], (err, rows) => {
-                if (err) {
-                    console.log(err.message);
-                }
-                let sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;
-                db.all(sql, [profile.provider, profile.id], (err, rows) => {
-                    if (err) {
-                        console.log(err.message);
-                    }
-                    done(null, rows[0]);
-                });
-            })
-        }else{
-            done(null, rows[0]);
-        }
-    });
-    db.close();
+    getUser(profile).then(user => {
+        done(null, user);
+    })
   }
 ));
 
@@ -80,6 +49,49 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/privacy-policy',
                                       failureRedirect: '/' }));
+
+function findUser(provider, id) {        
+    const sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;  
+    return new Promise((resolve, reject) => {
+        db.all(sql, [provider, id], (err, rows) => {
+            if (err) {
+                reject(err);
+            }
+            if (!rows || rows.length === 0) {
+                resolve(null);
+            }else{
+                resolve(rows[0]);
+            }
+        });
+    });
+    db.close();
+}
+
+function saveUser(data) {
+    const sql = `INSERT INTO users (provider, provider_id, display_name, name) VALUES (?, ?, ?, ?)`;
+    return new Promise((resolve, reject) => {
+        db.all(sql, [data.provider, data.id, data.displayName, data.username || data.displayName], (err, rows) => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        });
+    });
+}
+
+async function getUser(userData) {
+    try{
+        let result = await findUser(userData.provider, userData.id);
+        if(!result) {
+            await saveUser(userData);
+            result = await findUser(userData.provider, userData.id)
+        }
+        return result
+    } catch(error) {
+        console.log(error);
+        return null
+    }
+}
 
 module.exports = {
     app

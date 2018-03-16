@@ -5,9 +5,9 @@ function getComments (dbLocation, postName) {
         // open the database
         let db = new sqlite3.Database(dbLocation);
          
-        let sql = `SELECT json FROM comments WHERE name = '${postName}'`;
+        let sql = `SELECT json FROM comments WHERE name = ?`;
          
-        db.all(sql, [], (err, rows) => {
+        db.all(sql, [postName], (err, rows) => {
           if (err) {
             reject(err);
           }
