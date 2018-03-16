@@ -1,7 +1,8 @@
 const templatesModule = require("./templatesModule");
 module.exports = (templates) => {
     return (req, res) => {
-        templatesModule.render(req.json, templates, templates.container)
+        const user = req.user && req.user.display_name || null;
+        templatesModule.render(req.json, templates, user)
         .then((html) => {
             res.send(html)
         })

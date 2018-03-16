@@ -63,7 +63,8 @@
                 <form onsubmit="cmt.submitComment(event);">
                     <textarea name="text"></textarea>
                     <div class="cmt-buttons">
-                        <button type="submit" class="btn btn-primary cmt-btn">Post as a guest</button>
+                        <button type="button" class="btn btn-success cmt-btn" onclick="cmt.fbLogin();">Fb</button>
+                        <button type="submit" class="btn btn-primary cmt-btn">Post as <%= user || 'guest' %></button>
                     </div>
                 </form>
             </div>

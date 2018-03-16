@@ -44,11 +44,19 @@ passport.use(new FacebookStrategy({
   }
 ));
 
+app.get('/auth/success', (req, res) => {
+    res.send(`<script>window.opener.window.cmt.getComments(); window.close()</script>`)
+});
+
+app.get('/auth/failure', (req, res) => {
+    res.send(`<script>window.opener.alert('authentication failed, please try again'); window.close()</script>`)
+});
+
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/privacy-policy',
-                                      failureRedirect: '/' }));
+  passport.authenticate('facebook', { successRedirect: '/auth/success',
+                                      failureRedirect: '/auth/failure' }));
 
 function findUser(provider, id) {        
     const sql = `SELECT id, name, display_name, provider, provider_id FROM users WHERE provider = ? AND provider_id = ?`;  

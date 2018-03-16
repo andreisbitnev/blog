@@ -1,8 +1,8 @@
 const ejs = require("ejs");
 let helpers = {moment: require("moment")}
 
-function render(json, templates) {
-    helpers = {...helpers, ...{templates, getHtml}};
+function render(json, templates, user) {
+    helpers = {...helpers, ...{templates, getHtml, user}};
     return new Promise((resolve, reject) => {
         resolve(getHtml(JSON.parse(json), templates.container));
     })

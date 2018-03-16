@@ -44,8 +44,13 @@ var cmt = (function cmtScripts() {
             alert(err.message)
         });
     }
+    function fbLogin() {
+        window.open('/auth/facebook', "facebookAuth", "height=800,width=600");
+    }
     init();
     return {
-        submitComment
+        submitComment,
+        getComments,
+        fbLogin
     }
 })();
