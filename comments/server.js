@@ -14,6 +14,8 @@ const getComments = require("./lib/getComments/middleware");
 const renderTemplates = require("./lib/renderTemplates/middleware");
 const postComment = require("./lib/postComment/middleware");
 const createComment = require("./lib/createComment/middleware");
+const errorHandling = require("./lib/errorHandling/middleware");
+const log = require("./logger");
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, '/../public')));
@@ -22,7 +24,7 @@ app.use(bodyParser.json());
 app.use(auth.app);
 
 app.get('/comments/:postName', [
-    getComments(db),
+    getComments(db, log),
     renderTemplates(templates)
 ]);
 
@@ -31,6 +33,8 @@ app.post('/comments/:postName', [
     createComment(templates),
     postComment(db)
 ]);
+
+app.use(errorHandling(log));
 
 app.listen(config.port, function () {
   console.log(`server running on port ${config.port}`);

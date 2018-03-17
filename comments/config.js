@@ -14,5 +14,6 @@ module.exports = require("rc")("comments", {
         'K438FHRUi(md@odsn59d94h6',
         '8ca)p#7Mnf&80fNfBho39sut'
     ],
+    errorLogs: 'errors.log',
     domain: 'localhost'
 });

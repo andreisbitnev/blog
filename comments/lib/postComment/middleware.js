@@ -8,8 +8,7 @@ module.exports = (db) => {
             res.status(200).json({ok: true})
         })
         .catch((err) => {
-            console.log(err);
-            res.status(500).json({error: "Internal server error"});
+            return err;
         });
     }
 }

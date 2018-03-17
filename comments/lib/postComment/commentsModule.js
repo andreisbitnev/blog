@@ -5,7 +5,7 @@ function updateComments (dbLocation, postName, data) {
      
         db.run(`UPDATE comments set json = ? WHERE name = ?`, [data, postName], function(err) {
             if (err) {
-                reject(err);
+                return reject(err);
             }
             resolve();
         });

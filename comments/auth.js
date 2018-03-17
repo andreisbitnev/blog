@@ -9,6 +9,7 @@ const passport = require('passport');
 const cookieSession = require('cookie-session')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const db = new sqlite3.Database(dbLocation);
+const log = require("./logger");
 
 app.use(cookieSession({
     name: 'session',
@@ -21,8 +22,12 @@ app.use(passport.session());
 
 passport.deserializeUser((user, done) => {        
     findUser(user.provider, user.id)
-    .then((user) => done(null, user))
-    .catch(err => done(err, null));
+    .then((user) => {
+        done(null, user)
+    })
+    .catch(err => {
+        done(err, null)
+    });
 });
 
 passport.serializeUser((user, done) => {
@@ -63,7 +68,7 @@ function findUser(provider, id) {
     return new Promise((resolve, reject) => {
         db.all(sql, [provider, id], (err, rows) => {
             if (err) {
-                reject(err);
+                return reject(err);
             }
             if (!rows || rows.length === 0) {
                 resolve(null);
@@ -80,8 +85,9 @@ function saveUser(data) {
     return new Promise((resolve, reject) => {
         db.all(sql, [data.provider, data.id, data.displayName, data.username || data.displayName], (err, rows) => {
             if (err) {
-                reject(err);
+                return reject(err);
             }
+            log.info(`New user - ${data.displayName} added`);
             resolve();
         });
     });
@@ -91,12 +97,13 @@ async function getUser(userData) {
     try{
         let result = await findUser(userData.provider, userData.id);
         if(!result) {
+            log.info(`User - ${userData.displayName} not yet registered`);
             await saveUser(userData);
             result = await findUser(userData.provider, userData.id)
         }
         return result
     } catch(error) {
-        console.log(error);
+        log.error(error);
         return null
     }
 }
