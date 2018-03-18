@@ -1,7 +1,8 @@
 const commentModule = require("./commentModule");
 module.exports = (templates) => {
     return (req, res, next) => {
-        commentModule.createComment(req.json, req.body, templates.comment)
+        const schema = require(templates.comment);
+        commentModule.createComment(req.json, req.body, schema)
         .then((updatedJson) => {
             req.json = updatedJson;
             next();
