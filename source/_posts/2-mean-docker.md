@@ -2,7 +2,7 @@
 layout: post
 title: "2-MEAN app with Docker"
 subtitle: "Dockerizing the MEAN app"
-date: 2018-03-09 01:00
+date: 2018-03-08 01:00
 author: "Andrei Sbitnev"
 header-img: "/img/mean_code.png"
 cdn: 'header-off'
