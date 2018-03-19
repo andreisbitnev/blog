@@ -1,68 +1,43 @@
 const assert = require("assert");
 const sinon = require("sinon");
-const commentsModule = require("../../../lib/getComments/commentsModule");
 const pquire = require("proxyquire");
-const sqliteStub = {
-    
-}
-const commentsModule = pquire("../../../lib/getComments/commentsModule", {
-    sqlite3: sqliteStub
-});
+let mock, sqliteStub, commentsModule;
 
 describe("commentsModule", () => {
-    let mock = {};
     beforeEach(() => {
-        mock.commentsJson = JSON.stringify({timestamp: 123456, name: "test_post", comments: []});
-        mock.template = {
-            name: Joi.string().default("defaultName"),
-            avatar: Joi.string().default("defaultAvatar"),
-            text: Joi.string().required(),
-            timestamp: Joi.number().forbidden().default(123456),
-            comments: Joi.array().forbidden().default([])
-        }
+        mock = {
+            rows: [{test: "test"}]
+        };
+        sqliteStub = function() {};
+        commentsModule = pquire("../../../lib/getComments/commentsModule", {
+            'sqlite3': sqliteStub
+        });
+        sqliteStub.Database = sinon.stub().returns({
+            all: (sql, params, func) => func(null, mock.rows),
+            run: (sql, params, func) => {
+                mock.rows = [{test: "test"}];
+                return func(null, mock.rows)
+            },
+            close: sinon.stub().returns()
+        });
     });
 
-    it("should return a new comment", done => {
-        const commentBodyStub = {"text": "Lorem Ipsum"};
-        const expectedResult = {
-            name: "test_post",
-            timestamp: 123456,
-            comments: [
-                {
-                "text":"Lorem Ipsum",
-                "name":"defaultName",
-                "avatar":"defaultAvatar",
-                "timestamp":123456,
-                "comments":[]
-                }
-            ]
-        };
-        commentModule.createComment(mock.commentsJson, commentBodyStub, mock.template).then(result => {
-            assert.deepEqual(JSON.parse(result), expectedResult);
+    it("should return a comments object", done => {
+        commentsModule.getComments('test.db', 'test').then(result => {
+            assert.deepEqual(result, mock.rows[0]);
             done();
         }).catch(err => {
-            done(err);
-        });
+            done(err)
+        })
     });
-    it("should reject if timestamp is supplied", done => {
-        const commentBodyStub = {"text": "Lorem Ipsum", "timestamp": 9876};
-        commentModule.createComment(mock.commentsJson, commentBodyStub, mock.template)
-        .catch(err => {
+
+    it("should add new post and return a comments object", done => {
+        mock.rows = [];
+        commentsModule.getComments('test.db', 'test').then(result => {
+            assert.deepEqual(result, mock.rows[0]);
             done();
-        });
-    });
-    it("should reject if comments are supplied", done => {
-        const commentBodyStub = {"text": "Lorem Ipsum", "comments": [{"test":"test"}]};
-        commentModule.createComment(mock.commentsJson, commentBodyStub, mock.template)
-        .catch(err => {
-            done();
-        });
-    });
-    it("should reject if text is not supplied", done => {
-        const commentBodyStub = {};
-        commentModule.createComment(mock.commentsJson, commentBodyStub, mock.template)
-        .catch(err => {
-            done();
-        });
+        }).catch(err => {
+            done(err)
+        })
     });
 })
