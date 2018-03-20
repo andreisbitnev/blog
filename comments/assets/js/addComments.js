@@ -52,7 +52,8 @@ var cmt = (function cmtScripts() {
     }
     function logout() {
         var request = new Request('/auth/logout', {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include'
         });
         fetch(request)
         .then(function(res) {
