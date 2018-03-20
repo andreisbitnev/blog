@@ -7,13 +7,14 @@ const Keygrip = require('keygrip');
 const passport = require('passport');
 const cookieSession = require('cookie-session')
 const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const log = require("./logger");
 const userModule = require("./lib/userModule/userModule");
 userModule.init(dbLocation, log);
 
 app.use(cookieSession({
     name: 'session',
-    keys: new Keygrip([config.secrets[0], config.secrets[1]], 'SHA384', 'base64'),
+    keys: new Keygrip([config.auth.secrets[0], config.auth.secrets[1]], 'SHA384', 'base64'),
     domain: config.domain
 }))
 
@@ -38,13 +39,25 @@ passport.serializeUser((user, done) => {
 });
 
 passport.use(new FacebookStrategy({
-    clientID: '1885955061416949',
-    clientSecret: '1ad63939891880998564fcc2d709b3ed',
-    callbackURL: "http://localhost:4000/auth/facebook/callback"
+    clientID: config.auth.facebook.clientID,
+    clientSecret: config.auth.facebook.clientSecret,
+    callbackURL: `http://${config.domain}/auth/facebook/callback`
   },
   function(accessToken, refreshToken, profile, done) {
     userModule.getUser(profile).then(user => {
         done(null, user);
+    })
+  }
+));
+
+passport.use(new GoogleStrategy({
+    clientID: config.auth.google.clientID,
+    clientSecret: config.auth.google.clientSecret,
+    callbackURL: `http://${config.domain}/auth/google/callback`
+  },
+  function(accessToken, refreshToken, profile, done) {
+    userModule.getUser(profile).then(user => {
+        return done(null, user);
     })
   }
 ));
@@ -57,12 +70,21 @@ app.get('/auth/failure', (req, res) => {
     res.send(`<script>window.opener.alert('authentication failed, please try again'); window.close()</script>`)
 });
 
+app.get('/auth/logout', (req, res) => {
+    req.logout();
+    res.status(200).json({ok: true})
+});
+
 app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/google', passport.authenticate('google',  { scope : ['profile', 'email'] })
+);
 
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/auth/success',
-                                      failureRedirect: '/auth/failure' }));
-
+  passport.authenticate('facebook', { successRedirect: `/auth/success`,
+                                      failureRedirect: `/auth/failure` }));
+app.get('/auth/google/callback', 
+    passport.authenticate('google', { successRedirect: `/auth/success`,
+                                        failureRedirect: `/auth/failure` }));
 module.exports = {
     app
 }

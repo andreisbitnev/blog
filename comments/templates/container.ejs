@@ -63,7 +63,13 @@
                 <form onsubmit="cmt.submitComment(event);">
                     <textarea name="text"></textarea>
                     <div class="cmt-buttons">
-                        <button type="button" class="btn btn-success cmt-btn" onclick="cmt.fbLogin();">Fb</button>
+                        <% if(user) { %>
+                            <button type="button" class="btn btn-danger cmt-btn" onclick="cmt.logout();">Logout</button>
+                        <% } else { %>
+                            <button type="button" class="btn btn-success cmt-btn" onclick="cmt.googleLogin();">Google</button>
+                            <button type="button" class="btn btn-success cmt-btn" onclick="cmt.fbLogin();">Fb</button>
+                        <% } %>
+                        <span> or </span>
                         <button type="submit" class="btn btn-primary cmt-btn">Post as <%= user || 'guest' %></button>
                     </div>
                 </form>

@@ -47,10 +47,28 @@ var cmt = (function cmtScripts() {
     function fbLogin() {
         window.open('/auth/facebook', "facebookAuth", "height=800,width=600");
     }
+    function googleLogin() {
+        window.open('/auth/google', "googleAuth", "height=800,width=600");
+    }
+    function logout() {
+        var request = new Request('/auth/logout', {
+            method: 'GET'
+        });
+        fetch(request)
+        .then(function(res) {
+            if(res.status === 200) {
+                getComments();
+            }
+        }).catch(function(err) {
+            alert(err.message)
+        });
+    }
     init();
     return {
         submitComment,
         getComments,
-        fbLogin
+        fbLogin,
+        googleLogin,
+        logout
     }
 })();
