@@ -1,5 +1,7 @@
 node_modules/
 public/
+comments/nginx
+comments/nginx.tar.gz
 db.json
 *.db
 *.log

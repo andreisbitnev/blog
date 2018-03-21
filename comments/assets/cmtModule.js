@@ -21,9 +21,17 @@ var cmt = (function cmtScripts() {
         var formData = new FormData(form);
         var obj = {};
         for (const [key, value]  of formData.entries()) {
-            obj[key] = value;
+            if(key === 'position') {
+                obj[key] = value.split("/");
+            } else {
+                obj[key] = value;
+            }
         }
         return JSON.stringify(obj);
+    }
+    function toggle(timestamp) {
+        var cmtBox = document.querySelector('[data-cmt-timestamp="' + timestamp + '"]');
+        cmtBox.classList.toggle("hidden");
     }
     function submitComment(e) {
         e.preventDefault();
@@ -32,7 +40,8 @@ var cmt = (function cmtScripts() {
         headers.append("Content-Type", "application/json");
         var request = new Request('/comments/'+ postName, {
             method: 'POST',
-            body: body,
+            credentials: 'include',
+            body,
             headers
         });
         fetch(request)
@@ -70,6 +79,7 @@ var cmt = (function cmtScripts() {
         getComments,
         fbLogin,
         googleLogin,
-        logout
+        logout,
+        toggle
     }
 })();

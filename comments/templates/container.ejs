@@ -51,9 +51,26 @@
                     .cmt-buttons {
                         display: flex;
                         justify-content: flex-end;
+                        align-items: center;
+                        flex-wrap: wrap;
                     }
                     .cmt-btn {
                         border-radius: 5px;
+                        margin-bottom: 10px;
+                    }
+                    .cmt-button-info {
+                        padding: 0 10px 0 10px;
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                    }
+                    .cmt-social-button {
+                        width: 40px;
+                        height: 40px;
+                        margin-left: 10px;
+                        background-position: center;
+                        background-size: cover;
+                        cursor: pointer;
+                        margin-bottom: 10px;
                     }
                     
                 </style>
@@ -62,20 +79,22 @@
             <div class="cmt-comment-box">
                 <form onsubmit="cmt.submitComment(event);">
                     <textarea name="text"></textarea>
+                    <input type="hidden" name="position" value="<%= data.timestamp.toString() %>">
                     <div class="cmt-buttons">
                         <% if(user) { %>
                             <button type="button" class="btn btn-danger cmt-btn" onclick="cmt.logout();">Logout</button>
                         <% } else { %>
-                            <button type="button" class="btn btn-success cmt-btn" onclick="cmt.googleLogin();">Google</button>
-                            <button type="button" class="btn btn-success cmt-btn" onclick="cmt.fbLogin();">Fb</button>
+                            <span class="cmt-button-info">Login with:</span>
+                            <div class="cmt-social-button" style="background-image:url(/assets/google_login.svg)" onclick="cmt.googleLogin();"></div>
+                            <div class="cmt-social-button" style="background-image:url(/assets/fb_login.png)" onclick="cmt.fbLogin();"></div>
                         <% } %>
-                        <span> or </span>
+                        <span class="cmt-button-info">or</span>
                         <button type="submit" class="btn btn-primary cmt-btn">Post as <%= user || 'guest' %></button>
                     </div>
                 </form>
             </div>
-            <ul class="cmt-comments" data-cmt-time="<%= data.timestamp %>">
-                <%- getHtml(data.comments, templates.comments) %>
+            <ul class="cmt-comments">
+                <%- getHtml({comments: data.comments, position: data.timestamp.toString()}, templates.comments) %>
             </ul>
         </div>
     

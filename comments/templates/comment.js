@@ -3,9 +3,9 @@ const Joi = require("joi");
 const config = require("../config")
 
 module.exports = {
-    name: Joi.string().default(config.commentDefault.name),
-    avatar: Joi.string().default(config.commentDefault.avatar),
+    name: Joi.string().forbidden().default(config.commentDefault.name),
     text: Joi.string().required(),
-    timestamp: Joi.number().forbidden().default(new Date().getTime()),
-    comments: Joi.array().forbidden().default([])
+    timestamp: Joi.number().forbidden(),
+    comments: Joi.array().forbidden().default([]),
+    position: Joi.array().items(Joi.number()).required()
 };

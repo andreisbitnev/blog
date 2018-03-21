@@ -1,20 +1,30 @@
-<% for(let i=0; i<data.length; i++) { %>
+<% data.comments.forEach((comment) => { %>
         <li class="cmt-comment">
-            <div class="cmt-avatar" style="background-image:url(<%= data[i].avatar %>)"></div>
             <div class="cmt-content">
                 <div class="cmt-row">
-                    <div class="cmt-name"><%= data[i].name %></div>
-                    <div class="cmt-date"><%= moment(data[i].timestamp).fromNow() %></div>
+                    <div class="cmt-name"><%= comment.name %></div>
+                    <div class="cmt-date"><%= moment(comment.timestamp).fromNow() %></div>
                 </div>
                 <div class="cmt-row">
-                    <div class="cmt-text"><%= data[i].text %></div>
+                    <div class="cmt-text"><%= comment.text %></div>
                 </div>
                 <div class="cmt-row">
-                    <span class="cmt-reply">Reply</span>
+                    <span class="cmt-reply" onclick="cmt.toggle(<%= comment.timestamp %>);">Reply</span>
                 </div>
                 <div class="cmt-row">
-                    <ul class="cmt-comments" data-cmt-time="<%= data[i].timestamp %>"><%- getHtml(data[i].comments, templates.comments) %></ul>
+                    <div class="cmt-comment-box hidden" data-cmt-timestamp="<%= comment.timestamp %>">
+                        <form onsubmit="cmt.submitComment(event);">
+                            <textarea name="text"></textarea>
+                            <input type="hidden" name="position" value="<%= data.position + '/' + comment.timestamp.toString() %>">
+                            <div class="cmt-buttons">
+                                <button type="submit" class="btn btn-primary cmt-btn">Post as <%= user || 'guest' %></button>
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="cmt-comments">
+                        <%- getHtml({comments: comment.comments, position: data.position + '/' + comment.timestamp.toString()}, templates.comments) %>
+                    </ul>
                 </div>
             </div>
         </li>
-<% } %>
+<% }) %>

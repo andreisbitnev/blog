@@ -5,9 +5,7 @@ const session = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(session)
 const config = require("./config");
 const dbLocation = path.join(__dirname, config.database);
-const Keygrip = require('keygrip');
 const passport = require('passport');
-const cookieSession = require('cookie-session')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const log = require("./logger");
@@ -20,15 +18,8 @@ app.use(session({
     saveUninitialized: false,
     secret: config.auth.secrets[0],
     cookie: { domain: config.domain },
-    store: new SQLiteStore({ db: 'session.db' })
+    store: new SQLiteStore({ db: config.database })
 }));
-
-// app.use(cookieSession({
-//     name: 'session',
-//     expires: moment(new Date()).add(3, 'm').toDate(),
-//     keys: new Keygrip([config.auth.secrets[0], config.auth.secrets[1]], 'SHA384', 'base64'),
-//     domain: config.domain
-// }))
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -83,12 +74,6 @@ app.get('/auth/failure', (req, res) => {
 });
 
 app.get('/auth/logout', (req, res) => {
-    // let cookies = req.cookies;
-    // res.writeHead(200, {
-    //     'Set-Cookie': `session=${cookies.session}; Expires=${ new Date() }`,
-    //     'Content-Type': 'application/json'
-    //   });
-    // res.end(JSON.stringify({ok: true}));
     req.session.destroy();
     res.end(JSON.stringify({ok: true}));
 });
