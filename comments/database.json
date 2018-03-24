@@ -1,6 +1,0 @@
-{
-    "dev": {
-        "driver": "sqlite",
-        "filename": "./main.db"
-    }
-}
