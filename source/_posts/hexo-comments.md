@@ -2,7 +2,7 @@
 layout: post
 title: hexo-comments
 subtitle: "Setting up hexo blog with comments"
-date: 2018-03-24 20:50
+date: 2018-03-25 20:50
 tags:
     - Hexo
     - hexo-comments
@@ -15,7 +15,7 @@ As mentioned earlier, the goal of this whole blog is to provide step-by-step gui
 I\`m using [hexo](https://hexo.io/), which is quite simple and powerfull blogging framework, yet it\`s simplicity comes with some limitations. Commenting functionality is one of them. There are however possibilities to integrate comments in your blog, like integrating a third party plugin tool like [disqus](https://disqus.com/).<br>
 I don\`t really like the idea of using any third party tools for a simple feature like "comments on the blog", neither do I want to pay for it. So I decided to build my own commenting tool, which will be simple like hexo. And since hexo is mostly used by developers and designers, the tool should also be configurable and allow users to add features and change styles easily.<br>
 This guide will walk you through the basic setup and configuration of the [hexo-comments](https://github.com/andreisbitnev/hexo-comments) project. In the end of the tutorial we will dive a bit deeper, and add an avatar feature to the project, to better understand the structure of the project and possibilities for extension.
-<img src="/img/blog-hexo.jpg" style="height:0; width:0; position: absolute">
+<img src="/img/blog-hexo.png" style="height:0; width:0; position: absolute">
 
 ## Creating a new hexo blog
 First we need to install hexo cli tool globally
